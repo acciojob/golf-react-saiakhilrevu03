@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ballVisible: false,
-      ballPosition: 0,
-    };
+    this.state = { ballVisible: false, ballPosition: 0 };
+
+    this.handleStartClick = this.handleStartClick.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   componentDidMount() {
@@ -17,18 +17,18 @@ class App extends Component {
     window.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  handleStartClick = () => {
+  handleStartClick() {
     this.setState({ ballVisible: true });
-  };
+  }
 
-  handleKeyDown = (event) => {
+  handleKeyDown(event) {
     if (!this.state.ballVisible) return;
-    if (event.keyCode === 39) { // Right arrow key
+    if (event.keyCode === 39) {
       this.setState(prevState => ({
         ballPosition: prevState.ballPosition + 5,
       }));
     }
-  };
+  }
 
   render() {
     const { ballVisible, ballPosition } = this.state;
